@@ -20,5 +20,5 @@ managedNodeGroups:
 #  clusterLogging:
 #    enableTypes: ["*"]
 
-secretsEncryption:
-  keyARN: ${MASTER_ARN}
+# secretsEncryption:
+#  keyARN: ${MASTER_ARN}
