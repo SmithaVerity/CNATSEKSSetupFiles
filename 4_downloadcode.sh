@@ -6,6 +6,8 @@ aws kms create-alias --alias-name alias/ekssetup --target-key-id $(aws kms creat
 export MASTER_ARN=$(aws kms describe-key --key-id alias/ekssetup --query KeyMetadata.Arn --output text)
 echo "export MASTER_ARN=${MASTER_ARN}" | tee -a ~/.bash_profile
 
+
+echo account=${ACCOUNT_ID}
 echo region=${AWS_REGION}
 echo az=${AZS[0]}
 echo key=${MASTER_ARN}
