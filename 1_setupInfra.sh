@@ -12,9 +12,12 @@ eksctl version
 curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 helm version 
 
+cd ..
 git clone https://github.com/aws-containers/ecsdemo-frontend.git
 git clone https://github.com/aws-containers/ecsdemo-nodejs.git
 git clone https://github.com/aws-containers/ecsdemo-crystal.git
+
+cd CNATSEKSSetupFiles/
 
 aws kms create-alias --alias-name alias/ekssetup --target-key-id $(aws kms create-key --query KeyMetadata.Arn --output text)
 export MASTER_ARN=$(aws kms describe-key --key-id alias/ekssetup --query KeyMetadata.Arn --output text)
