@@ -1,20 +1,34 @@
-curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.0/2024-01-04/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-sudo mv -v ./kubectl /usr/local/bin 
-kubectl version
+sudo yum update
+sudo yum -y install python-pip
+sudo yum install git -y
+sudo yum install firewalld -y
+pip3 install --user --upgrade boto3
 
 
-curl --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-sudo mv -v /tmp/eksctl /usr/local/bin
-eksctl version
-
-
-curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-helm version 
-
-cd ..
-git clone https://github.com/aws-containers/ecsdemo-frontend.git
-git clone https://github.com/aws-containers/ecsdemo-nodejs.git
-git clone https://github.com/aws-containers/ecsdemo-crystal.git
-
-cd CNATSEKSSetupFiles/
+python3 -c "import boto3
+import os
+from botocore.exceptions import ClientError 
+ec2 = boto3.client('ec2')
+volume_info = ec2.describe_volumes(
+    Filters=[
+        {
+            'Name': 'attachment.instance-id',
+            'Values': [
+                os.getenv('instance_id')
+            ]
+        }
+    ]
+)
+volume_id = volume_info['Volumes'][0]['VolumeId']
+try:
+    resize = ec2.modify_volume(    
+            VolumeId=volume_id,    
+            Size=30
+    )
+    print(resize)
+except ClientError as e:
+    if e.response['Error']['Code'] == 'InvalidParameterValue':
+        print('ERROR MESSAGE: {}'.format(e))"
+if [ $? -eq 0 ]; then
+    sudo reboot
+fi
