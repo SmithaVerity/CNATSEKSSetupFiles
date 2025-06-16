@@ -1,7 +1,5 @@
-sudo yum update
-sudo yum -y install python-pip
-sudo yum install git -y
-sudo yum install firewalld -y
+
+sudo yum -y install python-pip && sudo yum install firewalld -y
 pip3 install --user --upgrade boto3
 
 
