@@ -1,6 +1,9 @@
 sudo yum -y install python-pip && sudo yum install firewalld -y
 pip3 install --user --upgrade boto3
 
+export instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+echo instance_id=${instance_id}
+
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.0/2024-01-04/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv -v ./kubectl /usr/local/bin 
