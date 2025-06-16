@@ -7,9 +7,7 @@ sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.ama
 sudo chmod +x /usr/local/bin/kubectl
 
 sudo yum -y install jq gettext bash-completion
-echo 'yq() {
-  docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
-}' | tee -a ~/.bashrc && source ~/.bashrc
+
 for command in kubectl jq envsubst aws
   do
     which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND"
