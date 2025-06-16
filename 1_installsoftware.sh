@@ -1,3 +1,8 @@
+sudo yum -y install python-pip && sudo yum install firewalld -y
+pip3 install --user --upgrade boto3
+export instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+echo instance_id=${instance_id}
+
 sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.21.5/2022-01-21/bin/linux/amd64/kubectl
 sudo chmod +x /usr/local/bin/kubectl
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
