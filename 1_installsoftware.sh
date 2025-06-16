@@ -5,9 +5,7 @@ echo instance_id=${instance_id}
 
 sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.21.5/2022-01-21/bin/linux/amd64/kubectl
 sudo chmod +x /usr/local/bin/kubectl
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
+
 sudo yum -y install jq gettext bash-completion
 echo 'yq() {
   docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
