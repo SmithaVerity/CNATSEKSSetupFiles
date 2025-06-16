@@ -8,7 +8,7 @@ sudo chmod +x /usr/local/bin/kubectl
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
-sudo yum -y install jq gettext bash-completion moreutils
+sudo yum -y install jq gettext bash-completion
 echo 'yq() {
   docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
 }' | tee -a ~/.bashrc && source ~/.bashrc
