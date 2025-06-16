@@ -9,4 +9,12 @@ echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
 echo "export AZS=(${AZS[@]})" | tee -a ~/.bash_profile
 aws configure set default.region ${AWS_REGION}
 aws configure get default.region
+aws kms create-alias --alias-name alias/ekssetup --target-key-id $(aws kms create-key --query KeyMetadata.Arn --output text)
+export MASTER_ARN=$(aws kms describe-key --key-id alias/ekssetup --query KeyMetadata.Arn --output text)
+echo "export MASTER_ARN=${MASTER_ARN}" | tee -a ~/.bash_profile
+
+echo account=${ACCOUNT_ID}
+echo region=${AWS_REGION}
+echo az=${AZS[0]}
+echo key=${MASTER_ARN}
 aws sts get-caller-identity --query Arn | grep ekssetupadmin -q && echo "IAM role valid" || echo "IAM role NOT valid"
