@@ -1,9 +1,6 @@
 sudo yum -y install python-pip && sudo yum install firewalld -y
 pip3 install --user --upgrade boto3
 
-export instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-echo instance_id=${instance_id}
-
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
